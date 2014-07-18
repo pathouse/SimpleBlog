@@ -1,27 +1,13 @@
 package templates
 
-import (
-	"html/template"
-	"net/http"
-	"simpleblog/app/support"
-)
-
-var (
-	SiteLayout *template.Template = template.New("layout")
-)
-
-func init() {
+func ParseTemplateBinaries() []string {
+	var parsed []string
 	for _, name := range AssetNames() {
 		asset, err := Asset(name)
 		if err != nil {
-			support.LogStacktrace(err)
+			panic(err)
 		}
-		template.Must(SiteLayout.Parse(string(asset[:])))
+		parsed = append(parsed, string(asset[:]))
 	}
-}
-
-func Execute(resp http.ResponseWriter, args interface{}) {
-	if err := SiteLayout.ExecuteTemplate(resp, "layout", args); err != nil {
-		support.LogStacktrace(err)
-	}
+	return parsed
 }
