@@ -30,10 +30,7 @@ type serverEvent struct {
 }
 
 func NewServerLogger(mux http.Handler, out io.Writer) http.Handler {
-	return &ServerLogger{
-		mux: mux,
-		out: out,
-	}
+	return &ServerLogger{mux: mux, out: out}
 }
 
 func (s *ServerLogger) ServeHTTP(resp http.ResponseWriter, req *http.Request) {

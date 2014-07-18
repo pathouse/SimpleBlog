@@ -1,28 +1,19 @@
 package controllers
 
 import (
-	"html/template"
 	"net/http"
-	"simpleblog/app/support"
+	"simpleblog/app/templates"
 )
 
-const (
-	PagesContentPath string = "/Users/patsicle/workspace/go/src/simpleblog/app/templates/pages/content.html"
-)
-
-type Page struct {
+type PageHandler struct {
 	Title string
 	Body  string
 }
 
-func Home(resp http.ResponseWriter, req *http.Request) {
-	p := &Page{
-		Title: "Simple Blog - Home",
-		Body:  "Welcome to my simple blog.",
-	}
+func NewPageHandler(title, body string) http.Handler {
+	return &PageHandler{Title: title, Body: body}
+}
 
-	templates := template.Must(template.ParseFiles(PagesContentPath, LayoutPath))
-	if err := templates.ExecuteTemplate(resp, "layout", p); err != nil {
-		support.LogStacktrace(err)
-	}
+func (p *PageHandler) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
+	templates.Execute(resp, p)
 }
