@@ -5,21 +5,33 @@ import (
 	"simpleblog/app/support"
 )
 
-type PageHandler struct {
-	context *appContext
-	Title   string
-	Body    string
+type Page struct {
+	Title       string
+	Bodyclass   string
+	MoreStyles  []string
+	MoreScripts []string
 }
 
-func NewPageHandler(context *appContext, title, body string) http.Handler {
-	return &PageHandler{
-		context: context,
-		Title:   title,
-		Body:    body}
-}
-
-func (p *PageHandler) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
-	if err := p.context.appTemplates.ExecuteTemplate(resp, "layout", p); err != nil {
-		support.LogStacktrace(err)
+func IndexHandler(context *appContext, resp http.ResponseWriter, req *http.Request) (int, error) {
+	p := &Page{
+		Title:     "Home",
+		Bodyclass: "index-page",
 	}
+	if err := context.appTemplates.ExecuteTemplate(resp, "indexPage", p); err != nil {
+		support.LogStacktrace(err)
+		return http.StatusInternalServerError, err
+	}
+	return 200, nil
+}
+
+func AboutHandler(context *appContext, resp http.ResponseWriter, req *http.Request) (int, error) {
+	p := &Page{
+		Title:     "About",
+		Bodyclass: "about-page",
+	}
+	if err := context.appTemplates.ExecuteTemplate(resp, "aboutPage", p); err != nil {
+		support.LogStacktrace(err)
+		return http.StatusInternalServerError, err
+	}
+	return 200, nil
 }

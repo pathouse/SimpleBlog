@@ -1,7 +1,24 @@
-{{define "pages_home"}}
-<div class="row">
-  <div class="col-sm-offset-2 col-sm-8">
-    {{.Body}}
+{{define "indexPage"}}
+{{template "head" .}}
+<header class="hero-unit">
+  <div class="container">
+    <div class="row">
+      <div class="hero-text">
+        <h1>Go Go Gadget Go Blog</h1>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="row">
+    <div class="span6">
+    </div>
+  </div>
+
+  <div class="row">
   </div>
 </div>
+
+{{template "footer" .}}
 {{end}}
