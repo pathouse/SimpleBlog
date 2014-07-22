@@ -19,8 +19,29 @@ func main() {
 
 	router := mux.NewRouter()
 
-	router.Handle("/", modcon.AppHandler{Context: context, Handler: modcon.IndexHandler})
-	router.Handle("/about", modcon.AppHandler{Context: context, Handler: modcon.AboutHandler})
+	router.Handle("/",
+		modcon.AppHandler{
+			Context: context,
+			Handler: modcon.IndexHandler}).
+		Methods("GET")
+
+	router.Handle("/about",
+		modcon.AppHandler{
+			Context: context,
+			Handler: modcon.AboutHandler}).
+		Methods("GET")
+
+	router.Handle("/register",
+		modcon.AppHandler{
+			Context: context,
+			Handler: modcon.RegistrationHandler}).
+		Methods("GET")
+
+	router.Handle("/register",
+		modcon.RedirectHandler{
+			Context: context,
+			Handler: modcon.CreateUserHandler}).
+		Methods("POST")
 
 	fileServer := http.StripPrefix("/assets/", http.FileServer(assets.NewAssetFileSys()))
 	router.PathPrefix("/").Handler(fileServer)

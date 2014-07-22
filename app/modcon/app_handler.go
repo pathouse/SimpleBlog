@@ -10,6 +10,11 @@ type AppHandler struct {
 	Handler func(*appContext, http.ResponseWriter, *http.Request) (int, error)
 }
 
+type RedirectHandler struct {
+	Context *appContext
+	Handler func(*appContext, http.ResponseWriter, *http.Request)
+}
+
 func (ah AppHandler) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
 	status, err := ah.Handler(ah.Context, resp, req)
 	if err != nil {
@@ -22,4 +27,8 @@ func (ah AppHandler) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
 			http.Error(resp, http.StatusText(status), status)
 		}
 	}
+}
+
+func (rh RedirectHandler) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
+	rh.Handler(rh.Context, resp, req)
 }

@@ -1,7 +1,6 @@
 package modcon
 
 import (
-	"github.com/gorilla/securecookie"
 	"github.com/gorilla/sessions"
 	"github.com/jinzhu/gorm"
 	gotemp "html/template"
