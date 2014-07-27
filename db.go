@@ -7,7 +7,7 @@ import (
 )
 
 func OpenDB() gorm.DB {
-	db, err := gorm.Open("postgres", "dbname=blog_dev sslmode=disable")
+	db, err := gorm.Open("postgres", "dbname=gobone_dev sslmode=disable")
 	if err != nil {
 		support.LogStacktrace(err)
 		panic(err)
