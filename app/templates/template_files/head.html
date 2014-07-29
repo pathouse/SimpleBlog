@@ -6,22 +6,11 @@
     <title>{{.Title}}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script data-main="/assets/javascripts/main.js" src="/assets/javascripts/require.js"></script>
 
-    <script type="text/javascript" src="/assets/javascripts/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="/assets/javascripts/underscore-min.js"></script>
-    <script type="text/javascript" src="/assets/javascripts/backbone-min.js"></script>
     <link rel="stylesheet" type="text/css" href="/assets/stylesheets/bootstrap.css">
-
-    <script type="text/javascript" src="/assets/javascripts/application.js">
     <link rel="stylesheet" type="text/css" href="/assets/stylesheets/stylesheet.css">    
-
-    {{range .MoreStyles}}
-      <link rel="stylesheet" type="text/css" href="/assets/stylesheets/{{.}}">
-    {{end}}
-
-    {{range .MoreScripts}}
-      <script src="/assets/javascripts/{{.}}" type="text/javascript" charset="utf-8"></script>
-    {{end}}
   </head>
   <body class="{{.Bodyclass}}">
     <div class="container">
