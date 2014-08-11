@@ -1,22 +1,21 @@
 package modcon
 
 import (
-	"fmt"
 	"github.com/jinzhu/gorm"
 	_ "github.com/lib/pq"
 	"time"
 )
 
 type Post struct {
-	Id          int64
-	UserId      int64
-	Title       string
-	Body        string
-	Draft       bool
-	PublishedAt time.Time
-	CreatedAt   time.Time
-	UpdatedAt   time.Time
-	DeletedAt   time.Time
+	Id          int64     `json:"id"`
+	UserId      int64     `json:"user_id"`
+	Title       string    `json:"title"`
+	Body        string    `json:"body"`
+	Draft       bool      `json:"draft"`
+	PublishedAt time.Time `json:"-"`
+	CreatedAt   time.Time `json:"created_at"`
+	UpdatedAt   time.Time `json:"updated_at"`
+	DeletedAt   time.Time `json:"-"`
 }
 
 func (p *Post) Published() string {

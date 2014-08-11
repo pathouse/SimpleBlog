@@ -24,14 +24,14 @@ func IndexHandler(context *appContext, resp http.ResponseWriter, req *http.Reque
 	return 200, nil
 }
 
-func AboutHandler(context *appContext, resp http.ResponseWriter, req *http.Request) (int, error) {
-	p := &Page{
-		Title:     "About",
-		Bodyclass: "about-page",
-	}
-	if err := context.appTemplates.ExecuteTemplate(resp, "aboutPage", p); err != nil {
-		support.LogStacktrace(err)
-		return http.StatusInternalServerError, err
-	}
-	return 200, nil
-}
+// func AboutHandler(context *appContext, resp http.ResponseWriter, req *http.Request) (int, error) {
+// 	p := &Page{
+// 		Title:     "About",
+// 		Bodyclass: "about-page",
+// 	}
+// 	if err := context.appTemplates.ExecuteTemplate(resp, "aboutPage", p); err != nil {
+// 		support.LogStacktrace(err)
+// 		return http.StatusInternalServerError, err
+// 	}
+// 	return 200, nil
+// }

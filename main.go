@@ -15,6 +15,9 @@ func main() {
 
 	modcon.AutoMigrate(&db)
 
+	// testPost := &modcon.Post{Title: "Another post", Body: "Another body", Draft: false}
+	// db.Save(testPost)
+
 	context := modcon.NewAppContext(&db)
 
 	router := mux.NewRouter()
@@ -25,23 +28,53 @@ func main() {
 			Handler: modcon.IndexHandler}).
 		Methods("GET")
 
-	router.Handle("/about",
+	API := router.PathPrefix("/api").Subrouter()
+	//	API.Headers("Content-Type", "application/json")
+
+	postsAPI := API.PathPrefix("/posts").Subrouter()
+
+	postsAPI.Handle("/",
 		modcon.AppHandler{
 			Context: context,
-			Handler: modcon.AboutHandler}).
+			Handler: modcon.PostsIndexHandler}).
 		Methods("GET")
 
-	router.Handle("/register",
+	postsAPI.Handle("/{id:[0-9]+}",
 		modcon.AppHandler{
 			Context: context,
-			Handler: modcon.RegistrationHandler}).
+			Handler: modcon.PostsShowHandler}).
 		Methods("GET")
 
-	router.Handle("/register",
-		modcon.RedirectHandler{
+	postsAPI.Handle("/{id:[0-9]+}",
+		modcon.AppHandler{
 			Context: context,
-			Handler: modcon.CreateUserHandler}).
+			Handler: modcon.PostsUpdateHandler}).
+		Methods("PUT", "PATCH")
+
+	postsAPI.Handle("/new",
+		modcon.AppHandler{
+			Context: context,
+			Handler: modcon.PostsCreateHandler}).
 		Methods("POST")
+
+	// TODO - replace with Backbone Routes
+	// router.Handle("/about",
+	// 	modcon.AppHandler{
+	// 		Context: context,
+	// 		Handler: modcon.AboutHandler}).
+	// 	Methods("GET")
+
+	// router.Handle("/register",
+	// 	modcon.AppHandler{
+	// 		Context: context,
+	// 		Handler: modcon.RegistrationHandler}).
+	// 	Methods("GET")
+
+	// router.Handle("/register",
+	// 	modcon.RedirectHandler{
+	// 		Context: context,
+	// 		Handler: modcon.CreateUserHandler}).
+	// 	Methods("POST")
 
 	fileServer := http.StripPrefix("/assets/", http.FileServer(assets.NewAssetFileSys()))
 	router.PathPrefix("/").Handler(fileServer)

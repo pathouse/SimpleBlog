@@ -10,7 +10,7 @@ import (
 type appContext struct {
 	db           *gorm.DB
 	appTemplates *gotemp.Template
-	store        sessions.CookieStore
+	store        *sessions.CookieStore
 }
 
 // TODO - grab from ENV

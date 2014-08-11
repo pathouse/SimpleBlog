@@ -1,0 +1,12 @@
+<% var id = post.get('id') %>
+
+<td><%= post.get('title') %></td>
+<td><%= post.get('draft') %></td>
+<td>
+  <div class='button-group'>
+    <a href='posts/show/<%= id %>' class='btn btn-info'>Show</a>
+    <a href='posts/edit/<%= id %>' class='btn btn-default'>Edit</a>
+    <a href='posts/show/<%= id %>' class='btn btn-danger destroy'>Destroy</a>
+  </div>
+</td>
+
