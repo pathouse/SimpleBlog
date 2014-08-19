@@ -1,8 +1,7 @@
 all:
-	sass sass:assets/stylesheets
-	assetBinaries
-	templateBinaries
-	cleanup
+	make assetBinaries
+	make templateBinaries
+	make cleanup
 
 css:
 	sass --watch sass:assets/stylesheets

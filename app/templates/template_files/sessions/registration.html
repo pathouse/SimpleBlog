@@ -1,0 +1,56 @@
+{{define "registration"}}
+{{template "head" .}}
+<div class="row">
+  <div class="col-sm-offset-4 col-sm-4">
+    <h1>Sign Up</h1>
+
+    <form action="/register" method="POST" class="form-horizontal">
+      <div class="form-group">
+	<label for="FirstName" class="control-label col-sm-3">
+	  First Name:
+	</label>
+	<div class="col-sm-9">
+	  <input class="form-control" type="text" name="FirstName" size="16">
+	</div>
+      </div> 
+      <div class="form-group">
+	<label for="LastName" class="control-label col-sm-3">
+	  Last Name:
+	</label>
+	<div class="col-sm-9">
+	  <input class="form-control" type="text" name="LastName" size="16">
+	</div>
+      </div>     
+      <div class="form-group">
+	<label for="Email" class="control-label col-sm-3">
+	  Email:
+	</label>
+	<div class="col-sm-9">
+	  <input class="form-control" type="text" name="Email" size="16">
+	</div>
+      </div>
+      <div class="form-group">
+	<label for="Password" class="control-label col-sm-3">
+	  Password:
+	</label>
+	<div class="col-sm-9">
+	  <input class="form-control" type="password" name="Password" size="16">
+	</div>
+      </div>
+      <div class="form-group">
+	<label for="PasswordConfirmation" class="control-label col-sm-3">
+	  Password Confirmation:
+	</label>
+	<div class="col-sm-9">
+	  <input class="form-control" type="password" name="PasswordConfirmation" size="16">
+	</div>
+      </div>
+      <p>
+	<input type="submit" value="Register" class="btn btn-primary">
+	<a href="/" class="btn btn-default">Cancel</a>
+      </p>
+    </form>
+  </div>
+</div>
+{{template "footer" .}}
+{{end}}

@@ -1,7 +1,9 @@
-{{define "pages_home"}}
-<div class="row">
-  <div class="col-sm-offset-2 col-sm-8">
-    {{.Body}}
-  </div>
+{{define "indexPage"}}
+{{template "head" .}}
+{{template "header" .}}
+<div id="content">
+  Loading...
 </div>
+
+{{template "footer" .}}
 {{end}}
